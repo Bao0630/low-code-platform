@@ -1,0 +1,25 @@
+.editor {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(142, 142, 142);
+}
+
+.components-panel, .property-panel {
+  position: absolute;
+  width: 300px;
+  background-color: lightgray;
+  top: 0;
+  bottom: 0;
+}
+
+.components-panel {
+  left: 0;
+}
+
+.property-panel {
+  right: 0;
+}
+
+. {
+
+}
