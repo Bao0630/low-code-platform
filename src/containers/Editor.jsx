@@ -1,33 +1,51 @@
 import React from 'react';
+
 import './Editor.css';
 
-class Editor extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: {},
-    };
-  }
+import EditorBlock from './editor-block';
+import {registerConfig as config} from '../components/editor-config'
 
-  render() {
-    return (
-      <div class="editor">
-        <div class="editor components-panel"></div>
-        <div class="editor property-panel"></div>
-        <div class="editor menu"></div>
-        <div class="editor container"></div>
 
-          <div class="editor container-canvas">
-            <div class="editor container-canvas_content">
-              content
-            </div>
-          </div>
+function Editor(props) {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     data: {},
+  //   };
+    
+  // };
+  console.log(props.page);
 
-        <p>editor</p>
-      </div>
-    );
-  }
+  const containerSize = {
+    width: `${props.page.container.width}px`,
+    height: `${props.page.container.height}px`,
+  };
   
-}
+  return (
+    <div className="editor">
+      <div className="editor components-panel"></div>
+      <div className="editor property-panel"></div>
+      <div className="menu">
+
+      </div>
+      <div className="container" >
+
+        <div className="container-canvas" >
+          <div className="container-canvas_content" style={containerSize}>
+            content
+            {(
+              props.page.blocks.map(blockContent => 
+                (<EditorBlock block={blockContent} config={config}></EditorBlock>)
+              )
+            )}
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+  
+  
+};
 
 export default Editor;

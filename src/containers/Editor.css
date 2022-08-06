@@ -1,7 +1,7 @@
 .editor {
   width: 100%;
   height: 100%;
-  background-color: rgb(142, 142, 142);
+  background-color: rgb(189, 189, 189);
 }
 
 .components-panel, .property-panel {
@@ -12,10 +12,42 @@
   bottom: 0;
 }
 
+.menu {
+  position: absolute;
+  right: 400px;
+  left: 400px;
+  top:0;
+  width: auto;
+  height: 60px;
+  background-color: black;
+}
+
 .components-panel {
   left: 0;
 }
 
 .property-panel {
   right: 0;
+}
+
+.container {
+  padding: 80px 300px 0;
+  height: 100%;
+  box-sizing: border-box;
+  /* background-color: aqua; */
+}
+
+.container-canvas {
+  position: relative;
+  overflow: scroll;
+  height: 100%;
+}
+
+.container-canvas_content {
+  margin: 20px auto;
+  background-color: yellow;
+}
+
+.editor-blocks {
+  position: absolute;
 }
