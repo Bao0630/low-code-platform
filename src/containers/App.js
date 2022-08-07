@@ -9,6 +9,8 @@ import 'antd/dist/antd.min.css';
 function App() {
   let isEditing = true;
   const [pageData, setPageData] = useState(data);
+
+  
   if (isEditing) return (
     <div className="App" >
       <Editor page={pageData}></Editor>

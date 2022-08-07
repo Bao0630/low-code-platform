@@ -38,12 +38,13 @@
 }
 
 .container-canvas {
-  position: relative;
+  
   overflow: scroll;
   height: 100%;
 }
 
 .container-canvas_content {
+  position: relative;
   margin: 20px auto;
   background-color: yellow;
 }

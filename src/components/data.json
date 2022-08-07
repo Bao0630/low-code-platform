@@ -8,7 +8,8 @@
       "top": 100,
       "left": 100,
       "zIndex": 1,
-      "type": "text"
+      "type": "text",
+      "placeholder": ""
     },
     {
       "top": 100,

@@ -14,7 +14,8 @@ function Editor(props) {
   //   };
     
   // };
-  console.log(props.page);
+  //console.log(props.page);
+  //console.log(config);
 
   const containerSize = {
     width: `${props.page.container.width}px`,
@@ -23,8 +24,12 @@ function Editor(props) {
   
   return (
     <div className="editor">
-      <div className="editor components-panel"></div>
-      <div className="editor property-panel"></div>
+      <div className="editor components-panel">
+        {/* <ComponentList></ComponentList> */}
+      </div>
+      <div className="editor property-panel">
+
+      </div>
       <div className="menu">
 
       </div>

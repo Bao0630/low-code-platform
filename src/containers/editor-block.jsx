@@ -1,27 +1,23 @@
 
-function editorBlock(props) {
+function EditorBlock(props) {
   const style = {
     top: `${props.block.top}px`,
     left: `${props.block.left}px`
   };
 
-  // const config = ;
 
-  // return () => {
-  //   const component = props.config.componentMap[props.block.type];
-  //   const RenderComponent = component.render();
+  //console.log(props, props.config.componentsMap[props.block.type]);
+  
+  const renderComponent = function(){
+    const component = props.config.componentsMap[props.block.type];
+    return component.render();
+  }
 
-  //   return (
-  //     <div className="editor-blocks" style={style}>
-  //       {props.block.type}
-  //     </div>
-  //   )
-  // };
   return (
     <div className="editor-blocks" style={style}>
-      {props.block.type}
+      {renderComponent()}
     </div>
   );
 }
 
-export default editorBlock;
+export default EditorBlock;

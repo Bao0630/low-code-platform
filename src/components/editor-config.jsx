@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Typography, Button, Input } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 
 
@@ -22,16 +22,21 @@ export let registerConfig = createComponentsConfig();
 console.log(registerConfig);
 
 registerConfig.register({
-  label: '文本',
+  label: '标题',
   preview: () => 'TextArea prewview',
-  render: () => <TextArea></TextArea>,
+  render: () => <Typography>Text</Typography>,
   type: 'text'
 
 });
 registerConfig.register({
   label: '按钮',
   preview: () => 'Button prewview',
-  render: () => <Button ></Button>,
+  render: () => <Button type="primary">Button</Button>,
   type: 'button'
-
+});
+registerConfig.register({
+  label: '输入',
+  preview: () => 'Input prewview',
+  render: () => <Input placeholder={"text"}></Input>,
+  type: 'input'
 });
