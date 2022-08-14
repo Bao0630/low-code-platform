@@ -52,3 +52,38 @@
 .editor-blocks {
   position: absolute;
 }
+
+.component-item {
+  width: 250px;
+  min-height: 100px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  cursor: move;
+  user-select: none;
+  position: relative;
+}
+
+.component-item > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: blue;
+  color: white;
+  padding: 4px;
+}
+
+.component-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  opacity: 0.2;
+}

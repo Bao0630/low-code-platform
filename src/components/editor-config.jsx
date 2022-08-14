@@ -1,4 +1,4 @@
-import { Typography, Button, Input } from "antd";
+import { Typography, Button, Input, Checkbox, DatePicker } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 
 
@@ -30,13 +30,25 @@ registerConfig.register({
 });
 registerConfig.register({
   label: '按钮',
-  preview: () => 'Button prewview',
+  preview: () => <Button type="primary">Button</Button>,
   render: () => <Button type="primary">Button</Button>,
   type: 'button'
 });
 registerConfig.register({
   label: '输入',
-  preview: () => 'Input prewview',
+  preview: () => <Input placeholder={"text"}></Input>,
   render: () => <Input placeholder={"text"}></Input>,
   type: 'input'
+});
+registerConfig.register({
+  label: '选项框',
+  preview: () => <Checkbox disabled={true}>Checkbox</Checkbox>,
+  render: () => <Checkbox>Checkbox</Checkbox>,
+  type: 'checkbox'
+});
+registerConfig.register({
+  label: '日期选择框',
+  preview: () => <DatePicker></DatePicker>,
+  render: () => <DatePicker></DatePicker>,
+  type: 'checkbox'
 });
