@@ -13,7 +13,7 @@ function App() {
   
   if (isEditing) return (
     <div className="App" >
-      <Editor page={pageData}></Editor>
+      <Editor page={pageData} editPage={setPageData}></Editor>
     </div>
   );
 

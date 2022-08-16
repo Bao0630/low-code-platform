@@ -50,5 +50,5 @@ registerConfig.register({
   label: '日期选择框',
   preview: () => <DatePicker></DatePicker>,
   render: () => <DatePicker></DatePicker>,
-  type: 'checkbox'
+  type: 'datepicker'
 });

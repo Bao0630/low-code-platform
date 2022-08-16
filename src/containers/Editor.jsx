@@ -1,9 +1,11 @@
 import React from 'react';
-
+import { useRef, useEffect } from 'react';
 import './Editor.css';
 
 import EditorBlock from './editor-block';
-import {registerConfig as config} from '../components/editor-config'
+import { registerConfig as config } from '../components/editor-config'
+import { componentDragger } from '../utils/componentDragger';
+
 
 
 function Editor(props) {
@@ -17,37 +19,34 @@ function Editor(props) {
   //console.log(props.page);
   //console.log(config);
 
+  useEffect(() => {
+    // Update the document title using the browser API
+    const title = props.page.title ?? 'page';
+    document.title = `Editing ${title}`;
+  });
+
   const containerSize = {
     width: `${props.page.container.width}px`,
     height: `${props.page.container.height}px`,
   };
 
 
-  const containerRef = React.createRef();
-  const dragEnter = (event) => {
-    event.dataTransfer.dropEffect = 'move';
-    // event.dr
+  const canvasRef = useRef(null);
+  
+  // drag from components-panel
+  const {dragstart, dragend} = componentDragger(canvasRef, props);
 
-  };
-  const dragOver = (event) => {
+  // drag mulitple elements
+  const blockMousedown = (event, block) => {
     event.preventDefault();
-  };
-  const dragLeave = (event) => {
-    event.dataTransfer.dropEffect = 'none';
-  };
-  const drop = (event) => {
-
-  };
-
-  const dragStart = (event, component) => {
-    console.log(containerRef.current)
-    containerRef.current.addEventListener('dragEnter', dragEnter);
-    containerRef.current.addEventListener('dragOver', dragOver);
-    containerRef.current.addEventListener('dragLeave', dragLeave);
-    containerRef.current.addEventListener('drop', drop);
-
-    // event.dataTransfer
-  };
+    event.stopPropagation();
+    if (!block.focus) {
+      block.focus = true;
+    } else {
+      block.focus = false;
+    }
+    
+  }
 
   
   return (
@@ -57,7 +56,8 @@ function Editor(props) {
           <div 
             className='component-item'
             draggable
-            onDragStart={event => dragStart(event, component)}
+            onDragStart={(event) => dragstart(event, component)}
+            onDragEnd={dragend}
           >
             <span>{component.label}</span>
             <div>{component.preview()}</div>
@@ -78,12 +78,19 @@ function Editor(props) {
           <div 
             className="container-canvas_content" 
             style={containerSize}
-            ref={containerRef}
+            ref={canvasRef}
           >
             content
             {(
-              props.page.blocks.map(blockContent => 
-                (<EditorBlock block={blockContent} config={config}></EditorBlock>)
+              props.page.blocks.map(blockContent => (
+                <EditorBlock
+                  className={blockContent.focus ? 'editor-block-focus' : 'editor-block'}
+                  block={blockContent}
+                  config={config}
+                  updatePage={props.editPage}
+                  onMouseDown={(event) => blockMousedown(event, blockContent)}
+                  >
+                </EditorBlock>)
               )
             )}
             

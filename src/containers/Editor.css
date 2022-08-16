@@ -49,11 +49,39 @@
   background-color: yellow;
 }
 
-.editor-blocks {
+.editor-block {
   position: absolute;
 }
 
+.editor-block::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.editor-block-focus {
+  position: absolute;
+}
+
+.editor-block-focus::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px dashed lightskyblue;
+}
+
+.components-panel {
+  overflow-y: scroll;
+}
+
 .component-item {
+  
   width: 250px;
   min-height: 100px;
   margin: 20px auto;
@@ -87,3 +115,5 @@
   background-color: white;
   opacity: 0.2;
 }
+
+
