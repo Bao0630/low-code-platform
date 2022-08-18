@@ -17,29 +17,24 @@ export function blocksFocus(blocks, setBlocks) {
   const blockMouseDown = (event, block) => {
     event.preventDefault();
     event.stopPropagation();
+
     // debugger
     if (event.shiftKey) {
       block.focus = !block.focus;
-      // changeBlocksFocus();
-      // setFocus(!focus);
     } else if (!block.focus) {
       clearBlocksFocus();
       block.focus = true;
-      // changeBlocksFocus();
-      // setFocus(true);
     } else {
       block.focus = false;
-      // changeBlocksFocus();
-      // setFocus(false);
     }
     setBlocks([...blocks]);
 
     console.log(block.type, block.focus);
   }
   
-  const changeBlocksFocus = function() {
-    setBlocks([...blocks]);
-  }
+  // const changeBlocksFocus = function() {
+  //   setBlocks([...blocks]);
+  // }
 
   const clearBlocksFocus = function() {
     // debugger

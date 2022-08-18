@@ -3,6 +3,8 @@ import { useRef, useState, useEffect } from 'react';
 import './Editor.css';
 
 import EditorBlock from './editor-block';
+import ComponentPanel from './componentPanel';
+import EditorMenu from './editorMenu';
 import { registerConfig as config } from '../components/editor-config'
 import { componentDragger } from '../utils/componentDragger';
 import { blocksFocus } from '../utils/blocksFocus';
@@ -56,27 +58,17 @@ function Editor(props) {
 
   return (
     <div className="editor">
-      <div className="editor components-panel">
-        {config.componentsList.map(component => (
-          <div
-            className='component-item'
-            draggable
-            onDragStart={(event) => dragstart(event, component)}
-            onDragEnd={dragend}
-          >
-            <span>{component.label}</span>
-            <div>{component.preview()}</div>
-          </div>
-        ))}
-
-        {/* <ComponentList></ComponentList> */}
-      </div>
+      <ComponentPanel
+        dragstart={dragstart}
+        dragend={dragend}
+        componentsList={config.componentsList}
+      >
+      </ComponentPanel>
       <div className="editor property-panel">
 
       </div>
-      <div className="menu">
-
-      </div>
+      
+      <EditorMenu></EditorMenu>
       <div className="container" >
 
         <div className="container-canvas" >
@@ -92,10 +84,7 @@ function Editor(props) {
                   block={block}
                   config={config}
                   editState={editState}
-
                   onMouseDown={blockMouseDown}
-                // setBlocks={setBlocks}
-                // focusedBlocks={focusedBlocks}
                 >
                 </EditorBlock>)
               )

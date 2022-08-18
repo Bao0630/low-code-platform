@@ -32,24 +32,57 @@ function EditorBlock(props) {
     setAlignCenter(false);
     // console.log(props)
     //console.log(offsetWidth, offsetHeight);
-  }, []);
-
+  }, [alignCenter, blockTop, blockLeft]);
 
   // const [focus, setFocus] = useState(props.block.focus);
   // console.log(props.block.focus)
   
+
+  // drag element
+  const [dragState, setDragState] = useState({
+    startX: 0,
+    startY: 0
+  });
+
+  const onDragStart = (e) => {
+    setDragState({
+      startX: e.clientX,
+      startY: e.clientY
+    });
+  }
+
+  const onDragStop = (e) => {
+    
+    console.log('delta:', e.clientY - dragState.startY, e.clientX - dragState.startX);
+    // console.log(style)
+
+    setBlockTop(blockTop + e.clientY - dragState.startY);
+    setBlockLeft(blockLeft + e.clientX - dragState.startX);
+
+    console.log(style)
+  }
+
+
+
   const blockContent = <div
                         className={props.block.focus ? 'editor-block-focus' : 'editor-block'}
-                        style={style}
+                        style={props.editState === 'drag'? "" : style}
                         ref={blockRef}
                         onMouseDown={(e) => props.onMouseDown(e, props.block)}
                       >
                         {renderComponent()}
                       </div>;
-  
+
+  let position={x: blockLeft, y: blockTop}
+
   if (props.editState === 'drag') 
   return (
-    <Draggable>
+    <Draggable
+      onStart={(e) => onDragStart(e)}
+      onStop={(e) => onDragStop(e)}
+      position={position}
+    
+    >
       {blockContent}
     </Draggable>
   );

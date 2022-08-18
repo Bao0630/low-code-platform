@@ -1,5 +1,6 @@
 // unsupported
-// issue: 使用自定义 mouse 事件，拥有焦点的组件块在拖动中无法及时更新（拖动显示）
+// issue: 1. 使用自定义 mouse 事件，拥有焦点的组件块在拖动中无法及时更新（拖动显示）
+//        2. mousedown 事件与 focus 模块中的 focusMouseDown 存在冲突
 // selution: 暂定使用 redux 解决组件状态变化问题
 
 export function blocksDragger(focusedBlocks, unfocusedBlocks, setBlocks) {

@@ -12,15 +12,7 @@
   bottom: 0;
 }
 
-.menu {
-  position: absolute;
-  right: 400px;
-  left: 400px;
-  top:0;
-  width: auto;
-  height: 60px;
-  background-color: black;
-}
+
 
 .components-panel {
   left: 0;
