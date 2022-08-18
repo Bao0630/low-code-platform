@@ -1,6 +1,6 @@
-import deepcopy from 'deepcopy';
+// import deepcopy from 'deepcopy';
 
-export function componentDragger(ref, props) {
+export function componentDragger(ref, blocks, setBlocks) {
 
   let currentComponent = null;
 
@@ -19,23 +19,23 @@ export function componentDragger(ref, props) {
   const drop = (event) => {
     if (!currentComponent) return;
 
-    const page = props.page;
-    let blocks = page.blocks;
+    // const page = props.page;
+    // let blocks = page.blocks;
 
-    const pageData = {
-      ...page, blocks: [
-        ...blocks,
-        {
-          top: event.offsetY,
-          left: event.offsetX,
-          zIndex: 1,
-          type: currentComponent.type,
-          alignCenter: true
-        }
-      ]
-    };
+    const blockData = [
+      ...blocks,
+      {
+        top: event.offsetY,
+        left: event.offsetX,
+        zIndex: 1,
+        type: currentComponent.type,
+        alignCenter: true
+      }
+    ];
 
-    props.editPage(deepcopy(pageData));
+    // props.editPage(deepcopy(pageData));
+    // blocks = blockData;
+    setBlocks(blockData);
     currentComponent = null;
   };
 

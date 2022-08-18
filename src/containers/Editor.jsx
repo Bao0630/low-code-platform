@@ -1,11 +1,12 @@
 import React from 'react';
-import { useRef, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import './Editor.css';
 
 import EditorBlock from './editor-block';
 import { registerConfig as config } from '../components/editor-config'
 import { componentDragger } from '../utils/componentDragger';
-
+import { blocksFocus } from '../utils/blocksFocus';
+import { useMemo } from 'react';
 
 
 function Editor(props) {
@@ -14,7 +15,7 @@ function Editor(props) {
   //   this.state = {
   //     data: {},
   //   };
-    
+
   // };
   //console.log(props.page);
   //console.log(config);
@@ -30,30 +31,34 @@ function Editor(props) {
     height: `${props.page.container.height}px`,
   };
 
-
+  const [editState, setEditState] = useState('drag');
   const canvasRef = useRef(null);
-  
+  const [blocks, setBlocks] = useState(props.page.blocks);
+
   // drag from components-panel
-  const {dragstart, dragend} = componentDragger(canvasRef, props);
+  const { dragstart, dragend } = componentDragger(canvasRef, blocks, setBlocks);
+
+
+  // mouseDown Foucus
+  const { blockMouseDown, containerMouseDown} = blocksFocus(blocks, setBlocks);
+
+  const {focusedBlocks, unfocusedBlocks} = useMemo(() => {
+    let focused = [];
+    let unfocused = [];
+    blocks.forEach(block => (block.focus ? focused : unfocused).push(block));
+    console.log(`focused: ${focused}`);
+    return {focused, unfocused};
+  }, [blocks]);
+
+
 
   // drag mulitple elements
-  const blockMousedown = (event, block) => {
-    event.preventDefault();
-    event.stopPropagation();
-    if (!block.focus) {
-      block.focus = true;
-    } else {
-      block.focus = false;
-    }
-    
-  }
 
-  
   return (
     <div className="editor">
       <div className="editor components-panel">
         {config.componentsList.map(component => (
-          <div 
+          <div
             className='component-item'
             draggable
             onDragStart={(event) => dragstart(event, component)}
@@ -63,7 +68,7 @@ function Editor(props) {
             <div>{component.preview()}</div>
           </div>
         ))}
-        
+
         {/* <ComponentList></ComponentList> */}
       </div>
       <div className="editor property-panel">
@@ -75,32 +80,34 @@ function Editor(props) {
       <div className="container" >
 
         <div className="container-canvas" >
-          <div 
-            className="container-canvas_content" 
+          <div
+            className="container-canvas_content"
             style={containerSize}
             ref={canvasRef}
+            onMouseDown={(event) => containerMouseDown(event)}
           >
-            content
             {(
-              props.page.blocks.map(blockContent => (
+              blocks.map(block => (
                 <EditorBlock
-                  className={blockContent.focus ? 'editor-block-focus' : 'editor-block'}
-                  block={blockContent}
+                  block={block}
                   config={config}
-                  updatePage={props.editPage}
-                  onMouseDown={(event) => blockMousedown(event, blockContent)}
-                  >
+                  editState={editState}
+
+                  onMouseDown={blockMouseDown}
+                // setBlocks={setBlocks}
+                // focusedBlocks={focusedBlocks}
+                >
                 </EditorBlock>)
               )
             )}
-            
+
           </div>
         </div>
       </div>
     </div>
   );
-  
-  
+
+
 };
 
 export default Editor;

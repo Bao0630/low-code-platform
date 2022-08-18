@@ -1,11 +1,15 @@
-import { useRef, useEffect } from "react";
-
+import { useRef, useState, useEffect } from "react";
+import Draggable from 'react-draggable';
 function EditorBlock(props) {
-  const style = {
-    top: `${props.block.top}px`,
-    left: `${props.block.left}px`
-  };
+  
+  const [blockTop, setBlockTop] = useState(props.block.top);
+  const [blockLeft, setBlockLeft] = useState(props.block.left);
+  const [alignCenter, setAlignCenter] = useState(props.block.alignCenter);
 
+  const style = {
+    top: `${blockTop}px`,
+    left: `${blockLeft}px`
+  };
 
   //console.log(props, props.config.componentsMap[props.block.type]);
   
@@ -14,31 +18,43 @@ function EditorBlock(props) {
     return component.render();
   }
 
+
   const blockRef = useRef(null);
+  
   useEffect(() => {
-    if (!props.block.alignCenter) return ;
+    // dragged component alignCenter
+    if (!alignCenter) return ;
 
     const { offsetWidth, offsetHeight } = blockRef.current;
     
-    props.block.top = props.block.top - offsetHeight/2;
-    props.block.left = props.block.left - offsetWidth/2;
-    props.block.alignCenter = false;
-    console.log(props)
+    setBlockTop(blockTop < offsetHeight/2 ? 0 : blockTop - offsetHeight/2);
+    setBlockLeft(blockLeft < offsetWidth/2 ? 0 : blockLeft - offsetWidth/2);
+    setAlignCenter(false);
+    // console.log(props)
     //console.log(offsetWidth, offsetHeight);
-
   }, []);
 
 
+  // const [focus, setFocus] = useState(props.block.focus);
+  // console.log(props.block.focus)
+  
+  const blockContent = <div
+                        className={props.block.focus ? 'editor-block-focus' : 'editor-block'}
+                        style={style}
+                        ref={blockRef}
+                        onMouseDown={(e) => props.onMouseDown(e, props.block)}
+                      >
+                        {renderComponent()}
+                      </div>;
+  
+  if (props.editState === 'drag') 
   return (
-    <div
-      className={props.className}
-      style={style}
-      ref={blockRef}
-      onMouseDown={props.onMouseDown}
-    >
-      {renderComponent()}
-    </div>
+    <Draggable>
+      {blockContent}
+    </Draggable>
   );
+
+  return blockContent;
 }
 
 export default EditorBlock;

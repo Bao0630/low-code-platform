@@ -46,7 +46,7 @@
 .container-canvas_content {
   position: relative;
   margin: 20px auto;
-  background-color: yellow;
+  background-color: #eee;
 }
 
 .editor-block {
