@@ -1,21 +1,42 @@
 .menu {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   top:0;
-  width: 300px;
-  height: 60px;
+  width: 320px;
+  height: 50px;
   background-color: white;
 }
 
 .menu-item {
-
   width: 40px;
-  height: 40px;
+  height: 30px;
   margin: 20px;
-  background-color: blue;
+  background-color: gray;
 }
+
+button {
+  border: 0px;
+
+}
+
+#edit {
+  background: url(../img/create-outline.svg) no-repeat;
+}
+
+#drag {
+  background: url(../img/move-outline.svg) no-repeat;
+}
+
+#save {
+  background: url(../img/save-outline.svg) no-repeat;
+}
+
+#preview {
+  background: url(../img/eye-outline.svg) no-repeat;
+}
+

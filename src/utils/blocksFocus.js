@@ -49,6 +49,6 @@ export function blocksFocus(blocks, setBlocks) {
   }
 
   return {
-    blockMouseDown, containerMouseDown
+    blockMouseDown, containerMouseDown, clearBlocksFocus
   };
 }

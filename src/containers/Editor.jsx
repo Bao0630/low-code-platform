@@ -3,8 +3,8 @@ import { useRef, useState, useEffect } from 'react';
 import './Editor.css';
 
 import EditorBlock from './editor-block';
-import ComponentPanel from './componentPanel';
-import EditorMenu from './editorMenu';
+import ComponentPanel from './component-panel';
+import EditorMenu from './editor-menu';
 import { registerConfig as config } from '../components/editor-config'
 import { componentDragger } from '../utils/componentDragger';
 import { blocksFocus } from '../utils/blocksFocus';
@@ -37,19 +37,36 @@ function Editor(props) {
   const canvasRef = useRef(null);
   const [blocks, setBlocks] = useState(props.page.blocks);
 
+  const changeEditState = function () {
+    clearBlocksFocus();
+    const curState = editState === 'drag' ? 'edit' : 'drag';
+    setEditState(curState);
+
+    alert(`已切换到 ${curState} 模式`)
+    // console.log(curState);
+  }
+
+  const saveEditorChange = function () {
+    const pageData = props.page;
+    console.log(pageData, blocks);
+    // return pageData;
+  }
+
   // drag from components-panel
   const { dragstart, dragend } = componentDragger(canvasRef, blocks, setBlocks);
 
-
   // mouseDown Foucus
-  const { blockMouseDown, containerMouseDown} = blocksFocus(blocks, setBlocks);
+  const { blockMouseDown, containerMouseDown, clearBlocksFocus } = blocksFocus(blocks, setBlocks);
 
-  const {focusedBlocks, unfocusedBlocks} = useMemo(() => {
+  const { focusedBlocks, unfocusedBlocks } = useMemo(() => {
+
+    if (editState === 'drag') return {};
+    debugger
     let focused = [];
     let unfocused = [];
     blocks.forEach(block => (block.focus ? focused : unfocused).push(block));
     console.log(`focused: ${focused}`);
-    return {focused, unfocused};
+    return { focused, unfocused };
   }, [blocks]);
 
 
@@ -67,8 +84,13 @@ function Editor(props) {
       <div className="editor property-panel">
 
       </div>
-      
-      <EditorMenu></EditorMenu>
+
+      <EditorMenu
+        editState={editState}
+        changeEditState={changeEditState}
+        saveEditorChange={saveEditorChange}
+      >
+      </EditorMenu>
       <div className="container" >
 
         <div className="container-canvas" >
