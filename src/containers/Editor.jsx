@@ -5,10 +5,13 @@ import './Editor.css';
 import EditorBlock from './editor-block';
 import ComponentPanel from './component-panel';
 import EditorMenu from './editor-menu';
+import PropertyPanel from './property-panel';
 import { registerConfig as config } from '../components/editor-config'
 import { componentDragger } from '../utils/componentDragger';
 import { blocksFocus } from '../utils/blocksFocus';
 import { useMemo } from 'react';
+import { nanoid } from 'nanoid';
+// import { pageSaver } from '../utils/pageSaver'
 
 
 function Editor(props) {
@@ -22,20 +25,24 @@ function Editor(props) {
   //console.log(props.page);
   //console.log(config);
 
+  const initBlockUid = function() {
+
+  };
+  const [editState, setEditState] = useState('drag');
+  const canvasRef = useRef(null);
+  const [page, setPage] = useState(props.page);
+  const [blocks, setBlocks] = useState(props.page.blocks);
+
   useEffect(() => {
-    // Update the document title using the browser API
-    const title = props.page.title ?? 'page';
+    const title = page.title ?? 'page';
     document.title = `Editing ${title}`;
   });
 
   const containerSize = {
-    width: `${props.page.container.width}px`,
-    height: `${props.page.container.height}px`,
+    width: `${page.container.width}px`,
+    height: `${page.container.height}px`,
   };
 
-  const [editState, setEditState] = useState('drag');
-  const canvasRef = useRef(null);
-  const [blocks, setBlocks] = useState(props.page.blocks);
 
   const changeEditState = function () {
     clearBlocksFocus();
@@ -46,10 +53,22 @@ function Editor(props) {
     // console.log(curState);
   }
 
-  const saveEditorChange = function () {
-    const pageData = props.page;
+  const saveEditorChange = function() {
+    const pageData = {
+      ...page,
+      blocks: [...blocks]
+    };
     console.log(pageData, blocks);
+    // updateJSONFile(pageData)
     // return pageData;
+  }
+
+  const updateBlock = function(block, index) {
+    const updatedBlocks = blocks;
+    updateBlock[index] = block;
+
+    setBlocks(updatedBlocks);
+    console.log(blocks)
   }
 
   // drag from components-panel
@@ -61,11 +80,14 @@ function Editor(props) {
   const { focusedBlocks, unfocusedBlocks } = useMemo(() => {
 
     if (editState === 'drag') return {};
-    debugger
+    // debugger
     let focused = [];
     let unfocused = [];
-    blocks.forEach(block => (block.focus ? focused : unfocused).push(block));
-    console.log(`focused: ${focused}`);
+    blocks.forEach((block, idx) => {
+      block.index = idx;
+      (block.focus ? focused : unfocused).push(block);
+    });
+    console.log(focused[0]);
     return { focused, unfocused };
   }, [blocks]);
 
@@ -73,17 +95,29 @@ function Editor(props) {
 
   // drag mulitple elements
 
+
+  // save page
+  // const { updateJSONFile } = pageSaver('../components/data.json');
+
   return (
     <div className="editor">
       <ComponentPanel
         dragstart={dragstart}
         dragend={dragend}
         componentsList={config.componentsList}
+        
       >
       </ComponentPanel>
-      <div className="editor property-panel">
 
-      </div>
+      <PropertyPanel
+        focused={focusedBlocks ? focusedBlocks[0] : null}
+        updateBlock={updateBlock}
+        pageData={page}
+        updatePage={setPage}
+        curState={editState}
+
+      >
+      </PropertyPanel>
 
       <EditorMenu
         editState={editState}
@@ -96,14 +130,16 @@ function Editor(props) {
         <div className="container-canvas" >
           <div
             className="container-canvas_content"
-            style={containerSize}
+            style={page.container}
             ref={canvasRef}
             onMouseDown={(event) => containerMouseDown(event)}
           >
             {(
-              blocks.map(block => (
+              blocks.map((block, idx) => (
                 <EditorBlock
+                  index={idx}
                   block={block}
+                  updateBlock={updateBlock}
                   config={config}
                   editState={editState}
                   onMouseDown={blockMouseDown}

@@ -59,7 +59,14 @@ function EditorBlock(props) {
     setBlockTop(blockTop + e.clientY - dragState.startY);
     setBlockLeft(blockLeft + e.clientX - dragState.startX);
 
-    console.log(style)
+    
+    const block = props.block;
+    block.top = blockTop;
+    block.left = blockLeft;
+
+    // console.log("nb:", block, props.index);
+    props.updateBlock(block, props.index);
+    
   }
 
 

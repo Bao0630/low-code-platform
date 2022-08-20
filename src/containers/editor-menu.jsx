@@ -12,7 +12,7 @@ function EditorMenu(props) {
   // };
 
   return (
-    <div className="menu">
+    <div className="editor menu">
       <button id={props.editState} className="menu-item" onClick={props.changeEditState} title="切换编辑状态">
       </button>
       <button id="save" className="menu-item" onClick={props.saveEditorChange} title="保存页面">
