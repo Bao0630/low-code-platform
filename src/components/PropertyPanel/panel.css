@@ -1,23 +1,19 @@
 .panel {
   margin: 10px;
   margin-bottom: 0px;
-  overflow-y: scroll;
+  overflow-y: auto;
   line-height: 2rem;
 }
 
 .page {
   line-height: 2rem;
-
 }
 
 .block {
-
-
 }
 
 div {
 }
-
 
 .editor-item {
   display: flex;

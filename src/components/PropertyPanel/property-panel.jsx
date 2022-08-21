@@ -1,4 +1,4 @@
-import { InputNumber, Typography } from 'antd';
+import { Input, InputNumber, Typography } from 'antd';
 import { useState } from 'react';
 import './panel.css';
 
@@ -40,13 +40,15 @@ function PropertyPanel(props) {
 
   const onChangeZIndex = (val) => {
     console.log(val);
+
   }
 
   const pagePanel = (
     <div className='page panel'>
       <div className='page-title-editor'>
-        <span>页面标题：</span>
+        <label htmlFor='title'>页面标题：</label>
         <Typography.Text
+          id='title'
           editable={{ onChange: onTitleChange }}
           style={{left:"2px", width:"200px"}}
         >
@@ -55,8 +57,9 @@ function PropertyPanel(props) {
       </div>
       <div className='page-size-editor '>
         <div className='width-editor editor-item'>
-          <label>width: </label>
+          <label htmlFor='width'>width: </label>
           <InputNumber
+            id='width'
             min={100} 
             max={10000}
             defaultValue={pageWidth}
@@ -64,8 +67,9 @@ function PropertyPanel(props) {
           />
         </div>
         <div className='height-editor editor-item'>
-          <label>height: </label>
-          <InputNumber 
+          <label htmlFor='height'>height: </label>
+          <InputNumber
+            id='height'
             min={100}
             max={10000}
             defaultValue={pageHeight}
@@ -73,17 +77,48 @@ function PropertyPanel(props) {
           />
         </div>
       </div>
+      <div className='javascript-data'>
+        <label htmlFor='js-data'>JSON: </label>
+        <Input.TextArea
+          id='js-data'
+          rows={6}
+          defaultValue={JSON.stringify(props.pageData).toString()}
+          maxLength={5000}
+        />
+      </div>
     </div>
   );
 
-  const blockPanel = (
+  const blockPanel = !props.focused ? (
     <div className='block panel'>
-      <Typography.Text>{("block:" + props.focused)}</Typography.Text>
-      <div className='zIndex-editor editor-item'>
-        <label>zIndex: </label>
-        
-        <InputNumber min={0} max={100} defaultValue={props.pageData.zIndex} onChange={onChangeZIndex} />
+      <Typography.Text>点击组件开始编辑</Typography.Text>
+    </div>
+  ) : (
+    <div className='block panel'>
+      <div className='block-type editor-item'>
+        <label>block:</label>
+        <Typography.Text>{props.focused.type}</Typography.Text>
       </div>
+      <div className='zIndex-editor editor-item'>
+        <label htmlFor='zIndex'>zIndex: </label>
+        <InputNumber
+          id='zIndex'
+          min={0}
+          max={100}
+          defaultValue={props.focused.zIndex}
+          onChange={onChangeZIndex}
+        />
+      </div>
+      <div className='row-block-data'>
+        <label htmlFor='row-data'>block_data: </label>
+        <Input.TextArea
+          id='row-data'
+          rows={5}
+          defaultValue={JSON.stringify(props.focused).toString()}
+          maxLength={1100}
+        />
+      </div>
+
     </div>
   );
 

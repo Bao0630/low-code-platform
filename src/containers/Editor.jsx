@@ -3,9 +3,9 @@ import { useRef, useState, useEffect } from 'react';
 import './Editor.css';
 
 import EditorBlock from './editor-block';
-import ComponentPanel from './component-panel';
-import EditorMenu from './editor-menu';
-import PropertyPanel from './property-panel';
+import ComponentPanel from '../components/ComponentPanel/component-panel';
+import EditorMenu from '../components/EditorMenu/editor-menu';
+import PropertyPanel from '../components/PropertyPanel/property-panel';
 import { registerConfig as config } from '../components/editor-config'
 import { componentDragger } from '../utils/componentDragger';
 import { blocksFocus } from '../utils/blocksFocus';
@@ -32,6 +32,7 @@ function Editor(props) {
   const canvasRef = useRef(null);
   const [page, setPage] = useState(props.page);
   const [blocks, setBlocks] = useState(props.page.blocks);
+  const [focusedBlock, setfocusedBlock] = useState(null);
 
   useEffect(() => {
     const title = page.title ?? 'page';
@@ -88,6 +89,7 @@ function Editor(props) {
       (block.focus ? focused : unfocused).push(block);
     });
     console.log(focused[0]);
+    setfocusedBlock(focused[0]);
     return { focused, unfocused };
   }, [blocks]);
 
@@ -100,58 +102,52 @@ function Editor(props) {
   // const { updateJSONFile } = pageSaver('../components/data.json');
 
   return (
-    <div className="editor">
-      <ComponentPanel
-        dragstart={dragstart}
-        dragend={dragend}
-        componentsList={config.componentsList}
-        
-      >
-      </ComponentPanel>
+    <div className="App" >
+      <div className="editor">
+        <ComponentPanel
+          dragstart={dragstart}
+          dragend={dragend}
+          componentsList={config.componentsList}
+        />
+        <PropertyPanel
+          focused={focusedBlock ? focusedBlock : null}
+          updateBlock={updateBlock}
+          pageData={page}
+          updatePage={setPage}
+          curState={editState}
 
-      <PropertyPanel
-        focused={focusedBlocks ? focusedBlocks[0] : null}
-        updateBlock={updateBlock}
-        pageData={page}
-        updatePage={setPage}
-        curState={editState}
-
-      >
-      </PropertyPanel>
-
-      <EditorMenu
-        editState={editState}
-        changeEditState={changeEditState}
-        saveEditorChange={saveEditorChange}
-      >
-      </EditorMenu>
-      <div className="container" >
-
-        <div className="container-canvas" >
-          <div
-            className="container-canvas_content"
-            style={page.container}
-            ref={canvasRef}
-            onMouseDown={(event) => containerMouseDown(event)}
-          >
-            {(
-              blocks.map((block, idx) => (
-                <EditorBlock
-                  index={idx}
-                  block={block}
-                  updateBlock={updateBlock}
-                  config={config}
-                  editState={editState}
-                  onMouseDown={blockMouseDown}
-                >
-                </EditorBlock>)
-              )
-            )}
-
+        />
+        <EditorMenu
+          editState={editState}
+          changeEditState={changeEditState}
+          saveEditorChange={saveEditorChange}
+        />
+        <div className="container" >
+          <div className="container-canvas" >
+            <div
+              className="container-canvas_content"
+              style={page.container}
+              ref={canvasRef}
+              onMouseDown={(event) => containerMouseDown(event)}
+            >
+              {(
+                blocks.map((block, idx) => (
+                  <EditorBlock
+                    index={idx}
+                    block={block}
+                    updateBlock={updateBlock}
+                    config={config}
+                    editState={editState}
+                    onMouseDown={blockMouseDown}
+                  />
+                ))
+              )}
+            </div>
           </div>
         </div>
       </div>
     </div>
+    
   );
 
 
