@@ -2,7 +2,7 @@
   "name": "low-code-platform",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sdabao.github.io/low-code-platform/",
+  "homepage": "https://sdabao.github.io/low-code-platform",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^5.16.4",

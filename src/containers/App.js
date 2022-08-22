@@ -88,7 +88,7 @@ function App() {
         }}
         actions={[
           <Link
-            to={`/editor`}
+            to={"/low-code-platform/editor"}
           >
             <EditOutlined key="edit" />
           </Link>,

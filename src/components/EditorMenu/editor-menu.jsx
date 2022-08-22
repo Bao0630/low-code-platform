@@ -16,7 +16,7 @@ function EditorMenu(props) {
     <div className="editor menu">
       <Link
         to={{
-            pathname: '/',
+            pathname: '/low-code-platform',
         }}
       >
         <button id="home" className="menu-item" title="主页">

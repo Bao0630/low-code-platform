@@ -10,7 +10,6 @@ import { registerConfig as config } from '../components/editor-config'
 import { componentDragger } from '../utils/componentDragger';
 import { blocksFocus } from '../utils/blocksFocus';
 import { useMemo } from 'react';
-import { nanoid } from 'nanoid';
 import deepcopy from 'deepcopy';
 // import { pageSaver } from '../utils/pageSaver'
 

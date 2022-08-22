@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import store from './store'
 import { Provider } from 'react-redux'
@@ -16,8 +16,9 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="editor" element={<Editor page={page}/>} />
+        <Route path="/low-code-platform" element={<App />} />
+        <Route path="/low-code-platform/editor" element={<Editor page={page}/>} />
+        <Route path="*" element={<Navigate to="/low-code-platform" />} />
       </Routes>
     </BrowserRouter>
   </Provider>
