@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/low-code-platform/static/css/main.ec5a867e.css",
-    "main.js": "/low-code-platform/static/js/main.d694118f.js",
+    "main.js": "/low-code-platform/static/js/main.2633a898.js",
     "static/js/787.b29751d1.chunk.js": "/low-code-platform/static/js/787.b29751d1.chunk.js",
     "index.html": "/low-code-platform/index.html",
     "static/media/create-outline.svg": "/low-code-platform/static/media/create-outline.4687f6fb689356dc752e.svg",
@@ -10,11 +10,11 @@
     "static/media/home-outline.svg": "/low-code-platform/static/media/home-outline.8327a4ec11e7212b8a74.svg",
     "static/media/move-outline.svg": "/low-code-platform/static/media/move-outline.01e4283cfbdb3e8bd076.svg",
     "main.ec5a867e.css.map": "/low-code-platform/static/css/main.ec5a867e.css.map",
-    "main.d694118f.js.map": "/low-code-platform/static/js/main.d694118f.js.map",
+    "main.2633a898.js.map": "/low-code-platform/static/js/main.2633a898.js.map",
     "787.b29751d1.chunk.js.map": "/low-code-platform/static/js/787.b29751d1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ec5a867e.css",
-    "static/js/main.d694118f.js"
+    "static/js/main.2633a898.js"
   ]
 }
