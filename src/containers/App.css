@@ -1,19 +1,64 @@
-.App {
+.home {
   position: fixed;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
+  width: 100%;
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.site-header {
+  display: flex;
+  justify-content: flex-start;
+  display: inline-block;
+  width: 100%;
+  border-bottom: 1px solid lightgrey;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.user-avater {
+  
+
 }
 
+.app-menu {
+  position: absolute;
+  overflow-y: auto;
+  height: 100%;
+  left: 0;
+}
+
+.app-content {
+  padding-left: 250px;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #ccc;
+}
+
+.page-cards {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+}
+
+.page-card-item {
+  flex: 0 0 auto;
+}
+
+.add-page::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  opacity: 0.6;
+  transition: all 0.3s;
+}
+
+.add-page:hover::after {
+  opacity: 0.1;
+  transition: all 0.3s;
+}

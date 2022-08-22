@@ -11,6 +11,7 @@ import { componentDragger } from '../utils/componentDragger';
 import { blocksFocus } from '../utils/blocksFocus';
 import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
+import deepcopy from 'deepcopy';
 // import { pageSaver } from '../utils/pageSaver'
 
 
@@ -65,7 +66,7 @@ function Editor(props) {
   }
 
   const updateBlock = function(block, index) {
-    const updatedBlocks = blocks;
+    const updatedBlocks = deepcopy(blocks);
     updateBlock[index] = block;
 
     setBlocks(updatedBlocks);
@@ -133,6 +134,7 @@ function Editor(props) {
               {(
                 blocks.map((block, idx) => (
                   <EditorBlock
+                    key={idx}
                     index={idx}
                     block={block}
                     updateBlock={updateBlock}

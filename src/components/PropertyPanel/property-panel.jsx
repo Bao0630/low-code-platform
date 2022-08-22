@@ -1,4 +1,5 @@
 import { Input, InputNumber, Typography } from 'antd';
+import { useMemo } from 'react';
 import { useState } from 'react';
 import './panel.css';
 
@@ -7,6 +8,12 @@ function PropertyPanel(props) {
 
   const [pageWidth, setPageWidth] = useState(props.pageData.container.width);
   const [pageHeight, setPageHeight] = useState(props.pageData.container.height);
+  // const [curBlock, setcurBlock] = useState(props.focused);
+
+  const curBlock = useMemo(()=> {
+    const block = props.focused;
+    return block;
+  })
 
   const onChangePageSize = (val, type) => {
     const page = {
@@ -17,10 +24,10 @@ function PropertyPanel(props) {
       height: pageHeight
     }
     if (type === 'height') {
-      setPageHeight(val);
+      // setPageHeight(val);
       container.height = val;
     } else {
-      setPageWidth(val);
+      // setPageWidth(val);
       container.width = val;
     }
     
@@ -40,7 +47,27 @@ function PropertyPanel(props) {
 
   const onChangeZIndex = (val) => {
     console.log(val);
+    const block = {
+      ...curBlock
+    };
+    block.zIndex = val;
+    props.updateBlock(block, curBlock.index)
+    console.log(block, curBlock.index);
+  }
 
+  const onChangePos = (val, type) => {
+    console.log(val);
+    const block = {
+      ...curBlock
+    };
+    if (type === 'y') {
+      block.top = val
+    } else {
+      block.left = val;
+    }
+    props.updateBlock(block, curBlock.index)
+    // page.blocks[props.focused.index] = block;
+    console.log(block, curBlock.index);
   }
 
   const pagePanel = (
@@ -78,7 +105,7 @@ function PropertyPanel(props) {
         </div>
       </div>
       <div className='javascript-data'>
-        <label htmlFor='js-data'>JSON: </label>
+        <label htmlFor='js-data'>page_JSON: </label>
         <Input.TextArea
           id='js-data'
           rows={6}
@@ -89,7 +116,7 @@ function PropertyPanel(props) {
     </div>
   );
 
-  const blockPanel = !props.focused ? (
+  const blockPanel = !curBlock ? (
     <div className='block panel'>
       <Typography.Text>点击组件开始编辑</Typography.Text>
     </div>
@@ -97,7 +124,29 @@ function PropertyPanel(props) {
     <div className='block panel'>
       <div className='block-type editor-item'>
         <label>block:</label>
-        <Typography.Text>{props.focused.type}</Typography.Text>
+        <Typography.Text>{curBlock.type}</Typography.Text>
+      </div>
+      <div className='block-position-editor'>
+        <div className='pos-editor editor-item'>
+          <label htmlFor='x'>X: </label>
+          <InputNumber
+            id='x'
+            min={0}
+            max={pageWidth}
+            defaultValue={curBlock.left}
+            onChange={val => onChangePos(val, 'x')}
+          />
+        </div>
+        <div className='pos-editor editor-item'>
+          <label htmlFor='y'>Y: </label>
+          <InputNumber
+            id='y'
+            min={0}
+            max={pageHeight}
+            defaultValue={curBlock.top}
+            onChange={val => onChangePos(val, 'y')}
+          />
+        </div>
       </div>
       <div className='zIndex-editor editor-item'>
         <label htmlFor='zIndex'>zIndex: </label>
@@ -105,8 +154,16 @@ function PropertyPanel(props) {
           id='zIndex'
           min={0}
           max={100}
-          defaultValue={props.focused.zIndex}
+          defaultValue={curBlock.zIndex}
           onChange={onChangeZIndex}
+        />
+      </div>
+      <div className='event-editor editor-item'>
+        <label htmlFor='event'>event: </label>
+        <Input
+          id='event'
+          defaultValue="event"
+          disabled
         />
       </div>
       <div className='row-block-data'>

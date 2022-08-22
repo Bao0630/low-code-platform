@@ -30,14 +30,14 @@
 }
 
 .container {
-  padding: 80px 300px 0;
+  padding: 50px 300px 0;
   height: 100%;
   box-sizing: border-box;
   /* background-color: aqua; */
 }
 
 .container-canvas {
-  overflow: scroll;
+  overflow: auto;
   height: 100%;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .components-panel {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .component-item {

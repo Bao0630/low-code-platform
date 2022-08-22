@@ -1,3 +1,9 @@
 {
-  "userName": "Bao"
+  "userName": "Bao",
+  "userAvatar": "img.jpg",
+  "ownedPages": 2,
+  "pages": [
+    "page0",
+    "page1"
+  ]
 }

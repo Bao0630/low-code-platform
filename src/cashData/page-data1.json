@@ -1,0 +1,29 @@
+{
+  "title": "Page-1",
+  "container": {
+    "width": 800,
+    "height": 1600
+  },
+  "blocks": [
+    {
+      "top": 100,
+      "left": 100,
+      "zIndex": 1,
+      "type": "text",
+      "placeholder": ""
+    },
+    {
+      "top": 100,
+      "left": 200,
+      "zIndex": 1,
+      "type": "input"
+    },
+    {
+      "top": 200,
+      "left": 100,
+      "zIndex": 1,
+      "type": "button"
+    }
+
+  ]
+}

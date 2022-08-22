@@ -24,6 +24,10 @@ button {
 
 }
 
+#home {
+  background: url(./icons/home-outline.svg) no-repeat;
+}
+
 #edit {
   background: url(./icons/create-outline.svg) no-repeat;
 }

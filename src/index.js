@@ -9,20 +9,18 @@ import store from './store'
 import { Provider } from 'react-redux'
 import Editor from './containers/Editor';
 
-import page from './cashData/data.json';
+import page from './cashData/page-data0.json';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="editor" element={<Editor page={page}/>} />
-        </Routes>
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="editor" element={<Editor page={page}/>} />
+      </Routes>
+    </BrowserRouter>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
