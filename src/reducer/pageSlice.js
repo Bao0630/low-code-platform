@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 
 
-export const editorSlice = createSlice({
+export const pageSlice = createSlice({
   name: 'page',
   initialState: {
     page: {

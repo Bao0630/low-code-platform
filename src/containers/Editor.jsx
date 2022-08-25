@@ -6,7 +6,7 @@ import EditorBlock from './editor-block';
 import ComponentPanel from '../components/ComponentPanel/component-panel';
 import EditorMenu from '../components/EditorMenu/editor-menu';
 import PropertyPanel from '../components/PropertyPanel/property-panel';
-import { registerConfig as config } from '../components/ComponentRegister/editor-config'
+import { registerConfig as config } from '../utils/editor-config'
 import { componentDragger } from '../utils/componentDragger';
 import { blocksFocus } from '../utils/blocksFocus';
 import { useMemo } from 'react';

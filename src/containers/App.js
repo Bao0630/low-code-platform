@@ -128,7 +128,7 @@ function App() {
     <div className="home" >
       <PageHeader
         className="site-header"
-        title="unplayground"
+        title="Low-Code playground"
         subTitle="A Low-Code platform"
         avatar={avatar}
       />
