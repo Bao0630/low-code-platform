@@ -11,28 +11,22 @@ import { componentDragger } from '../utils/componentDragger';
 import { blocksFocus } from '../utils/blocksFocus';
 import { useMemo } from 'react';
 import deepcopy from 'deepcopy';
+import { useDispatch, useSelector } from 'react-redux';
 // import { pageSaver } from '../utils/pageSaver'
 
 
 function Editor(props) {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     data: {},
-  //   };
 
-  // };
-  //console.log(props.page);
-  //console.log(config);
+  const page = useSelector(state => state.page);
+  const blocks = useSelector(state => state.page.blocks);
 
-  const initBlockUid = function() {
-
-  };
   const [editState, setEditState] = useState('drag');
   const canvasRef = useRef(null);
-  const [page, setPage] = useState(props.page);
-  const [blocks, setBlocks] = useState(props.page.blocks);
+  // const [page, setPage] = useState(props.page);
+  // const [blocks, setBlocks] = useState(props.page.blocks);
   const [focusedBlock, setfocusedBlock] = useState(null);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const title = page.title ?? 'page';
@@ -111,9 +105,9 @@ function Editor(props) {
         />
         <PropertyPanel
           focused={focusedBlock ? focusedBlock : null}
-          updateBlock={updateBlock}
+          // updateBlock={updateBlock}
           pageData={page}
-          updatePage={setPage}
+          // updatePage={setPage}
           curState={editState}
 
         />
@@ -134,9 +128,9 @@ function Editor(props) {
                 blocks.map((block, idx) => (
                   <EditorBlock
                     key={idx}
-                    index={idx}
+                    // index={idx}
                     block={block}
-                    updateBlock={updateBlock}
+                    // updateBlock={updateBlock}
                     config={config}
                     editState={editState}
                     onMouseDown={blockMouseDown}
