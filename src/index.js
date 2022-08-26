@@ -8,7 +8,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import store from './store'
 import { Provider } from 'react-redux'
 import Editor from './containers/Editor';
-
+import { PageViewer } from './components/PageViewer/pageViewer';
+ 
 import page from './cashData/page-data0.json';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,6 +20,7 @@ root.render(
         <Route path="/low-code-platform" element={<App />} />
         <Route path="/low-code-platform/editor" element={<Editor page={page}/>} />
         <Route path="*" element={<Navigate to="/low-code-platform" />} />
+        <Route path="/low-code-platform/preview" element={<PageViewer page={page}/>} />
       </Routes>
     </BrowserRouter>
   </Provider>

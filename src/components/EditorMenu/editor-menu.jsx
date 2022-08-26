@@ -26,8 +26,14 @@ function EditorMenu(props) {
       </button>
       <button id="save" className="menu-item" onClick={props.saveEditorChange} title="保存页面">
       </button>
-      <button id="preview" className="menu-item" title="预览页面">
-      </button>
+      <Link
+        to={{
+            pathname: `/low-code-platform/preview`,
+        }}
+      >
+        <button id="preview" className="menu-item" title="预览页面">
+        </button>
+      </Link>
       {/* <button id="lunch" className='menu-item'></button> */}
         
     </div>

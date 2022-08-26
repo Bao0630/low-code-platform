@@ -28,3 +28,5 @@ export const pageSlice = createSlice({
     }
   }
 })
+
+export default pageSlice.reducer;

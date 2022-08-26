@@ -1,0 +1,17 @@
+section {
+  border-bottom: 2px solid gray;
+  margin: 10px;
+}
+
+h2 {
+  margin: 10px;
+  padding-left: 20px;
+}
+
+.viewer {
+  position: relative;
+}
+
+#return-button {
+  margin-right: 20px;
+}

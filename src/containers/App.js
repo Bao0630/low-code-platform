@@ -142,7 +142,6 @@ function App() {
         items={items}
       />
       <div className="app-content">
-        
         {content}
       </div>
 
