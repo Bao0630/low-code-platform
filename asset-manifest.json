@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/low-code-platform/static/css/main.ec5a867e.css",
-    "main.js": "/low-code-platform/static/js/main.2633a898.js",
+    "main.css": "/low-code-platform/static/css/main.fea6dbf6.css",
+    "main.js": "/low-code-platform/static/js/main.a85625dc.js",
     "static/js/787.b29751d1.chunk.js": "/low-code-platform/static/js/787.b29751d1.chunk.js",
     "index.html": "/low-code-platform/index.html",
     "static/media/create-outline.svg": "/low-code-platform/static/media/create-outline.4687f6fb689356dc752e.svg",
@@ -9,12 +9,12 @@
     "static/media/save-outline.svg": "/low-code-platform/static/media/save-outline.827af1cbc6dfb42058d8.svg",
     "static/media/home-outline.svg": "/low-code-platform/static/media/home-outline.8327a4ec11e7212b8a74.svg",
     "static/media/move-outline.svg": "/low-code-platform/static/media/move-outline.01e4283cfbdb3e8bd076.svg",
-    "main.ec5a867e.css.map": "/low-code-platform/static/css/main.ec5a867e.css.map",
-    "main.2633a898.js.map": "/low-code-platform/static/js/main.2633a898.js.map",
+    "main.fea6dbf6.css.map": "/low-code-platform/static/css/main.fea6dbf6.css.map",
+    "main.a85625dc.js.map": "/low-code-platform/static/js/main.a85625dc.js.map",
     "787.b29751d1.chunk.js.map": "/low-code-platform/static/js/787.b29751d1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ec5a867e.css",
-    "static/js/main.2633a898.js"
+    "static/css/main.fea6dbf6.css",
+    "static/js/main.a85625dc.js"
   ]
 }
