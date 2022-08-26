@@ -53,6 +53,7 @@ function Editor(props) {
       ...page,
       blocks: [...blocks]
     };
+    alert("page save");
     console.log(pageData, blocks);
     // updateJSONFile(pageData)
     // return pageData;
